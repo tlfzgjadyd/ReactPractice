@@ -32,7 +32,7 @@ const menuTransitions = useTransition(showMenu, null, {
                          key={key}
                          style={props}
                         className = "bg-black-t-50 fixed top-0 left-0 w-full h-full z-50"
-                        onclick={ ()=>setShowMenu(false) }
+                        onClick={ ()=>setShowMenu(false) }
                     >
                     </animated.div>
                 )
