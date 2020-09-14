@@ -1,0 +1,52 @@
+<항상 모든페이지 동시에 표시하는 신기한 현상>
+
+이전에 문법 잘 몰라서 잘못썼더니 신기한 기능이 나왔었음
+오늘 오랜만에 라우터 썼더니 또 그현상이 나왔는데
+나중에 써먹을 수 있지 않을까 해서 써둔다
+정규문법에 맞는건진 잘 모르겠음
+=====================================
+<신기하게 하는법>
+   <div className="App">
+      <Router>
+        <Link to="WeatherProblem">지구온난화 진행시키기</Link>
+        <Link to=" MapProblem">지역 설정하기</Link>
+        <Switch>
+          <Route to="/WeatherProblem">
+            <WeatherProblem/>
+          </Route>
+          <Route to="/MapProblem">
+             <MapProblem/>
+          </Route>      
+        </Switch>
+      </Router>
+    </div>
+이렇게하면 WeatherProblem 내의 내용과 위쪽의 버튼이 동시에뜸
+===================================
+<문법에 맞게 다시하기>
+   <div className="App">
+      <Router>
+        <Link to="WeatherProblem">지구온난화 진행시키기</Link>
+        <Link to=" MapProblem">지역 설정하기</Link>
+        <Switch>
+          <Route path="/WeatherProblem">
+            <WeatherProblem/>
+          </Route>
+          <Route path="/MapProblem">
+             <MapProblem/>
+          </Route>      
+        </Switch>
+      </Router>
+    </div>
+원래 문법에 맞게 Route부분의 to를 path로 바꿔주면
+원래 의도대로 2개의 버튼만 뜨게된다
+WeatherProblem을 버튼 클릭해야만 볼 수 있음
+======================================
+<문법 틀렸던거>
+
+1. 일단 Route는 to가 아니라 path임 Link to 짧은 글자끼리 조합 Route path 긴 글자끼리 조합
+2. Route path="/로 /를 꼭 붙여야 제대로 작동함
+3. Button Link to 하면 안됨
+   우선 버튼 태그는 할거면 소문자로 시작해야하고 <button>
+   그렇게 성공한다 하더라도 Link가 제대로 안먹혀서 url이 안변함
+   그러므로 그냥 <Link to="~"></Link>하는게 최선이다
+
