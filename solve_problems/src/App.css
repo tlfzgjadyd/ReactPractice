@@ -1,22 +1,12 @@
-.Weather{
-  max-width: 50%;
-  float: left;
-  margin-left:2%;
-}
-.WeatherByFetch{
-  max-width:50%;
-  float:left;
-  margin-left:10%;
-}
-.NaverPay{
-  float:left;
-  margin-top:25%;
-  margin-left:-24%;;
-}
 .App {
-  text-align: center;
+  text-align: left;
+  background-color:black;
+  width:120%;
+  height:1200px;
+  margin-top:-5%;
+  color:white;
+  overflow:hidden;
 }
-
 .App-logo {
   height: 40vmin;
   pointer-events: none;
@@ -50,4 +40,122 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+header{
+  color:white;
+  margin-top:0%;
+  padding-top:20%;
+  margin-left:100px;
+  position:relative;
+  animation: App-logo-spin infinite 20s linear;
+}
+
+.middle{
+color:white;
+position:absolute;
+margin-top:-40%;
+width:100%;
+}
+
+.middle #title{
+position:absolute;
+font-size:70px;
+font-weight:1000;
+margin-left:600px;
+margin-top:-15%;
+}
+.middle #earthTitle{
+  width:90px;
+  margin-right:15px;
+  margin-top:1%;
+  float:left;
+}
+footer{
+  color:white;
+  margin-left:1%;
+  margin-top:-18%;
+}
+.StartButtons{
+  float:left;
+  margin-top:0%;
+  margin-left : 10%;
+  padding:1%;
+  padding-left:2%;
+  border : 1px solid purple;
+  background-color:rgba(200,100,200,0.4);
+  border-radius:10px;
+  width:20%;
+  text-align:left;
+}
+a{
+  color:white;
+  font-size:20px;
+}
+a:link{
+  text-decoration: none;
+}
+a:hover{
+  color:rgb(167, 126, 184);
+}
+a:visited{
+  text-decoration: none;
+}
+.Weather{
+  color:white;
+  max-width: 50%;
+  float: left;
+  margin-left:10%;
+  margin-top:-5%; 
+  font-size:20px;
+}
+.Weather button, .WeatherByFetch button{
+  font-size:20px;
+  padding:5px;
+  border-radius:5px;
+  border:none;
+  width:250px;
+}
+.Weather button:hover, .WeatherByFetch button:hover{
+background-color:rgb(223, 203, 243);
+color:purple;
+}
+.WeatherByFetch{
+  color:white;
+  max-width:50%;
+  float:left;
+  margin-left:10%;
+  margin-top:-5%; 
+  font-size:20px;
+}
+.NaverPay{
+
+  color:white;
+  float:left;
+  position: relative;
+  margin-top:18%;
+  margin-left:-28%;
+  text-align:center;
+}
+.NaverPay input{
+  color:white;  
+  background-color:rgba(200,100,200,0.4);
+  border:1px solid purple;
+  padding:10px;
+  border-radius:5px;
+  font-size:20px;
+}
+
+.NaverPay input:hover{
+
+  background-color:rgba(200,100,200,0.7);
+}
+
+
+
+.MapProblem #mapTitle{
+  position:relative;
+  margin-left:40%;
+  margin-top:-5%;
+
 }

@@ -31,6 +31,7 @@ class NaverPay extends PureComponent {
     render() {
         return (
             <div className="NaverPay">
+                <h3>실제로 온도를 올리려면 결제를 진행하세요</h3>
                <input type="button" id="naverPayBtn" value="네이버페이 결제 버튼" onClick={this.payBtnClick}/>
             </div>
         ); //onClick에 가운데 대문자 하는거랑
