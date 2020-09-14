@@ -1,3 +1,13 @@
+.Weather{
+  max-width: 50%;
+  float: left;
+  margin-left:2%;
+}
+.WeatherByFetch{
+  max-width:50%;
+  float:left;
+  margin-left:10%;
+}
 .App {
   text-align: center;
 }
