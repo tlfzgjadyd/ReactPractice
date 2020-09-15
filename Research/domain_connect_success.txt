@@ -1,0 +1,52 @@
+<도메인 연결 재정리>
+
+처음 도메인 연결시 헤맸던걸 다시 정리한다
+이때 연결순서 재정리 한것과 주의할점 2가지로 구성되는데
+주의할점을 놓지면 절대 연결 안되니까 반드시 읽을것
+====================================
+<도메인 연결 순서>
+
+1. freenom에서 원하는 사이트명 구매후
+   freenom 상단바 Services->My Domains의 목록중
+   원하는 도메인명바의 manage domain버튼 클릭
+   탭중에서 맨오른쪽 Manage Freenom DNS클릭
+   Name의 첫칸은 비워두고 Type는 A Target은 104.198.14.52인데 이때
+   Target은 사람마다? 달랐던걸로 기억 사실잘 기억안남
+   어떻게 받아오는지는 지난번에 첨부한 동영상을 참고
+   Name의 두번째칸은 www만 쓰고 Type A에 Target 그대로 104.198.14.52
+   이떄 www. 처럼 .을 쓰면 안됨 딱 www만 써야한다
+   오른쪽 하단의 Save Changes로 완료
+
+2. Netlify 로그인후
+   깃연결은 아직 성공해본적이 없어서 모르겠고
+   deploy하고싶은거 여기에 드랍하세요 돼있는 부분에 react프로젝트의 build폴더만 드랍 (매우중요)
+   overview->Site settings의 Change site name에 내가 샀던 도메인명으로 바꿔줘야하고
+   overview->Domain settings에서 내가 산 도메인 추가해야됨
+   www.도메인명.내가선택한 끝자리해서 등록하고
+   그거 오른쪽 select 3개 뜨는 경우가 있는데 그럴땐 맨 마지막이었나 3번째꺼 눌러서 뭘 완료하면
+   Netlify DNS라는 청록색 둥근직사각형 표시가 뜨게된다 이러면 완료임 
+   (어떨땐 이거 없어도 됐던걸로 기억 아예 3번쨰 select 안뜨는 경우도 있음)
+   그 페이지에서 스크롤 맨밑으로 내리면 https 네모가 나오는데 첫번째 버튼 눌러서 뭐 하면됨
+   Renew certificate는 누르지말것 그냥 버튼 한번만 눌러서 완료하고 넘어가면 됐던걸로 기억
+
+3. 성공한 후에 쓰는거라 이부분 언제했는지 기억안나는데
+   deploy setting은 지난번에 성공한거 스샷찍은거 그거 똑같이 하면됨
+   스샷 내용은 다음과 같다
+
+   Base directory : not set
+   Build command : react-scripts build
+   Publish directory : build/
+   Builds : Active
+
+   새로운 폴더로 deploy하고싶은 경우 overview-> production deploys 눌러서 다시 드래그해주면 된다
+=====================================
+<주의사항 정리>
+
+1. 도메인 등록할때 무심코 www.도메인명.com으로 하는 경우가 많음
+   무료사이트 구매했기 때문에 com이 아니라 내가 선택한걸로 해야함
+
+2. 폴더 올릴떄 자꾸 리액트폴더 전체 올리는데 이러면 절대 deploy안됨
+   반드시 yarn build 해서 build폴더 만든 후 build 폴더만 올릴것
+
+3. 이때 build폴더만 올릴때 팁은 비쥬얼 스튜디오 코드에서 오른쪽버튼 copy path한걸로
+   폴더 찾아가면 되는점이다 왜 자꾸 오른쪽버튼 해서 폴더로 바로열기 찾으려고함
