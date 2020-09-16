@@ -67,14 +67,14 @@ class Weather extends PureComponent {
         this.setState({temp:this.state.LondonTemp});
     }
     componentDidMount() {   //제공되는 api앞에는 반드시 http같은걸 추가해야하며 값 제대로 들어왔는지 concole로 response 찍어봐야됨
-        axios.get('http://api.openweathermap.org/data/2.5/weather?id=2172797&appid=f951b19e378232992a50374991b1f518&units=metric&q=London')
+        axios.get('https://api.openweathermap.org/data/2.5/weather?id=2172797&appid=f951b19e378232992a50374991b1f518&units=metric&q=London')
         .then(response =>{
             this.setState({temp:response.data.main.temp, LondonTemp:response.data.main.temp}) //이부분이 선언해둔 2개의 변수에 데이터 집어넣는 부분이다
                         //하나의 setState 만으로도 여러개의 변수에 실체를 집어넣을 수 있음 this.setState({ , , })
             console.log(response.data.main.temp);//state 변수 사용시에는 this.temp말고 this.state.temp까지 해야함
         })
         .then(  //axios를 두 번 쓸 경우 .then으로 이어줘야했음 이렇게 안하는 방법도 있을것같긴 한데 일단 에러 안나고 성공한건 이게 끝이다
-        axios.get('http://api.openweathermap.org/data/2.5/weather?id=2172797&appid=f951b19e378232992a50374991b1f518&units=metric&q=Seoul')
+        axios.get('https://api.openweathermap.org/data/2.5/weather?id=2172797&appid=f951b19e378232992a50374991b1f518&units=metric&q=Seoul')
         .then(response =>{ 
             this.setState({SeoulTemp:response.data.main.temp})
             console.log(this.state.SeoulTemp); //state 변수 사용시에는 this.temp말고 this.state.temp까지 해야함
