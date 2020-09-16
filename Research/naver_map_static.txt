@@ -1,0 +1,99 @@
+<네이버 static지도 연결하기>
+
+네이버 static 지도 연결하는 방법을 정리한다
+=================================
+<일반적인 연동 순서>
+
+1. api사용하겠다고 등록하기
+https://console.ncloud.com/mc/solution/naverService/application?version=v2
+일단 여기서 application등록해야됨
+그러고나면 등록된거 밑에 버튼이 생기는데 인증정보 버튼을 누르면 
+client ID랑 client Secret이 뜬다 여기서 인증키 정보를 받아오는것임
+
+
+2. api문서를 읽어보며 어떤식으로 axios를 보내야하는지 알아본다
+이번에 성공했던 axios 코드의 경우 다음과 같다
+
+static map 정보 받아오는 코드
+-----------------------------------
+    componentDidMount(){
+        axios.get('https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?w=300&h=300&center=127.1054221,37.3591614&level=16&X-NCP-APIGW-API-KEY-ID=gzqf4on71t&X-NCP-APIGW-API-KEY=ddnnOWuUjtES0k0JO21ecv9ojJw58tGt0sCAWUNI')
+        .then(response=>{
+            console.log(response)})
+    }
+-----------------------------------
+
+
+3. 이제 받아온 이 map정보를 div에 인쇄해야됨
+ <img id="mapImg" src='https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?w=300&h=300&center=127.1054221,37.3591614&level=16&X-NCP-APIGW-API-KEY-ID=gzqf4on71t&X-NCP-APIGW-API-KEY=ddnnOWuUjtES0k0JO21ecv9ojJw58tGt0sCAWUNI' alt="지도"/>
+
+4.근데 사실 네이버 지도의 경우 여기서 axios를 쓸필요는 없었다 
+  componentDidMount함수 날려버려도 잘작동함
+  즉 img src안에서 바로 접속해서 얻어오는것!
+  왜 이런방식으로 써야하는건진 알길이 없고 일단 그냥 하란대로 따라해야하는거라고 한다
+==================================
+<성공한 static map코드>
+
+import React, { PureComponent } from 'react';
+import "./MapProblem.css"
+class MapProblem extends PureComponent {
+
+    render() {
+        return (
+            <div className="MapProblem">
+                <h2 id="mapTitle">공격할 지역을 선택하세요</h2>
+                <div id="mapArea">
+                    <img src='https://naveropenapi.apigw.ntruss.com/map-static/v2/raster?w=300&h=300&center=127.1054221,37.3591614&level=16&X-NCP-APIGW-API-KEY-ID=gzqf4on71t&X-NCP-APIGW-API-KEY=ddnnOWuUjtES0k0JO21ecv9ojJw58tGt0sCAWUNI' alt="지도"/>
+                </div>
+            </div>
+        );
+    }
+}
+
+export default MapProblem;
+==================================
+<이번 api연동에서 깨달은점>
+
+1. api한개 연동했다고 다른것도 다 할 수 있는게 아니라
+   api마다 방식을 익혀야한다
+   그래서 새로운 api 연동하려면 성공할때까지 다양한 실험을 거쳐야함
+   잘하는 사람도 한번에 연동하고 그러는게 아니라 api문서 계속 읽어보고
+   관련개념 찾아보고 다양하게 실험해보면서 성공시켜야함
+   따라서 정작 필요한 api쓸때 버벅이지 않으려면 다양한 유형의 api연동을 많이 해봐야겠다
+
+2. api문서를 읽을때는 끝까지 읽어야함
+   아래쪽에 operation이란게 있는데 뭔가 참조같은 느낌이라 무시하고
+   본페이지만 읽고 연동하려 했었음
+   근데 알고보니 거길 들어가야 진짜 연동방법이 나오는 것이었다
+   map api 연동이랑 전혀 관계없어보였으면서 진짜는 다 거기에 몰려있었음
+   어떤식으로 되어있냐면 본페이지에는 id랑 인증키비번 연동하는 방법만
+   써놔서 그걸 시도하고 있었는데 알고보니 그것만 전달하면 안되고
+   map에 필수적으로 필요한 정보들도 같이 넘겨야했던것임
+   근데 그 본페이지에는 이런 요소들 추가로 넘겨야한다는 말이 전혀 없고
+   operation 링크를 타고 들어가야만 그런 말이 있었음
+   따라서 api문서에 있는 모든 링크는 다 들어가보는걸로
+   본페이지 : https://apidocs.ncloud.com/ko/ai-naver/maps_static_map/
+   operation 진짜페이지 : https://apidocs.ncloud.com/ko/ai-naver/maps_static_map/raster/
+
+3. 일단 인증키만 보내면 다 되는것이 아니었다 
+   api에서 하란대로 했는데 안되는건
+   필요한 추가요소를 안써서일수도 있음을 깨달아야됨
+   그리고 그 필수적인 추가요소들은 내가 사이트 뒤져서 찾아야한다
+   그리고 이럴 경우 분명히 인증키와 인증비번을 같이 보내서 요청했는데도
+    unAuthorized로 권한에러가 뜬다
+    CORS에러랑 unAuthorized에러가 뜰 경우 인증키 인증비번 필수 파라미터 이런것들
+    안보냈는지 확인해봐야됨 cors 이럴떄 뜨는거 괴상하네 이럴거면 왜 다른포트에서
+    요청할때 뜨는 에러라고 정의해놓은거임
+
+4. 생각보다 사소한 문법들이 큰 영향을 미침
+   예를 들어 axios get에 ?이후의 파라미터부분에서
+   : 가 아니라 = 를 사용해야하는데 이런거 잘못써도 string이라 에러가 안뜬단말임
+   너무 자연스럽게 잘했는데 왜 안되지 생각하고 있었음
+   ?랑 &로 여러 파라미터 연결하는것도 빼먹었었는데 이것도 에러 안뜨니까 눈치를 못챔
+   id={변수명} 이렇게 있는거 값을 쓸때는 id= 변수값 이렇게 { } 없이 해야하는데
+   그냥 복붙해서 id={변수값} 이런식으로 돼도 에러로 안알려줌
+   그러니까 안될땐 문법쪽도 검토해볼것
+
+5. 그리고 충격적이게도 axios는 최신기술이 맞는데도 불구하고 지원하지 않는 경우도 많다고함..
+   그렇게 될 경우 어쩔수없이 내가 버렸던 fetch를 쓰거나 더 연구해서 어떻게든 axios를 써먹고 말거나 해야할듯
+   네이버 지도의 경우에도 axios 안먹히고 img에서 바로 얻어오는 등의 방법을 쓴다고 한다
