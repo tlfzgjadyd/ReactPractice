@@ -22,12 +22,7 @@ class WeatherByFetch extends PureComponent {
     getLondon(){
 ;
     }
-    componentDidMount(){
-       fetch('http://api.openweathermap.org/data/2.5/weather?id=2172797&appid=f951b19e378232992a50374991b1f518&units=metric&q=London')
-       .then(response=>response.json())
-       .then(myJson=>{console.log('Success:', JSON.stringify(myJson));})//이게 fetch로 받은 데이터 한번 써보는 형식이다
-       .catch(error=>{console.error('Error:', error)});
-    }
+    
     render() {
         return (
             <div className="WeatherByFetch">
