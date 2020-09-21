@@ -1,0 +1,114 @@
+<동적 map 연동하기>
+
+동적 map은 정적map에서 img 뿌리던 방식과는 다르게 진행된다고 한다 그러므로 순서를 정리한다
+일단 hello world예제를 따라해보게 되었다
+https://navermaps.github.io/maps.js.ncp/docs/tutorial-2-Getting-Started.html
+=================================================
+<동적 map 작동시키는 원리-구식 버전>
+
+동적 map을 연동시키는 구식 방법은 index.html에 다 때려박는것이다
+근데 이렇게 했더니 성공은 했지만 position이 absolute일때만 위치가 먹히고
+대신 지도 확대축소는 안되는 현상이 있었다
+그래서 이렇게도 가능했다 정도만 알아두고 실제로는 아래에 있는
+리액트를 적극적으로 사용하는 신식 버전을 사용하도록 한다
+
+어떤 원리로 해야하냐면
+1. index.html의 header에
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=실제 자신의 아이디"></script>
+   이걸 집어넣는다 이때 정적지도 할떄는 X-NCP-APIGW-API-KEY-ID=gzqf4on71t
+   이렇게 썼으니까 낯설거임 하지만 ncpClientId 옆에도 내가 받은 id쓰는거 맞음
+   그리고 이때는 이상하게도 비번 없이 아이디만 넣어도됨
+   그래서 결국 이렇게된다
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=gzqf4on71t"></script>
+
+2. 그다음에 map이랑 mapOptions 변수 설정하는 부분인데
+   이걸 리액트에다 하는게 아님 api 설명서 보면 body 안에다가 이걸 하고있어서
+   리액트에 해야한다고 착각할수 있겠는데 이 변수 설정까지도
+   index.html 안에 써야한다 index.html의 <body>태그 안에 쓰는것이다
+   그래서 결국 이렇게된다
+   <body>
+    <script>
+     var mapOptions = {
+        center: new naver.maps.LatLng(37.3595704, 127.105399),
+        zoom: 10
+     };
+
+     var map = new naver.maps.Map('map', mapOptions);
+     </script>
+
+3. 실제로 인쇄하는 부분 역시 body안에다 쓴다
+   리액트에다 썼던건 없애야됨
+   <body>
+        <div id="map" style="width:30%;height:400px;margin-left:40%;margin-top:25%;position:absolute;border:2px solid white;border-radius:5px"></div>
+    <script> ~ </script>
+
+=>총 합친 코드는 이랬다
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#000000" />
+    <meta
+      name="description"
+      content="Web site created using create-react-app"
+    />
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=gzqf4on71t"></script>
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <!--
+      manifest.json provides metadata used when your web app is installed on a
+      user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+    -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <!--
+      Notice the use of %PUBLIC_URL% in the tags above.
+      It will be replaced with the URL of the `public` folder during the build.
+      Only files inside the `public` folder can be referenced from the HTML.
+
+      Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+      work correctly both with client-side routing and a non-root public URL.
+      Learn how to configure a non-root public URL by running `npm run build`.
+    -->
+    <title>React App</title>
+  </head>
+  <body>
+    <div id="map" style="width:30%;height:400px;margin-left:40%;margin-top:25%;position:absolute;border:2px solid white;border-radius:5px"></div>
+<script>
+var mapOptions = {
+    center: new naver.maps.LatLng(37.3595704, 127.105399),
+    zoom: 10
+};
+
+var map = new naver.maps.Map('map', mapOptions);
+</script>
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    <!--
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+  </body>
+</html>
+=================================================
+<동적 map 작동시키는 원리-신식 버전>
+
+신식 버전은 index.html header안에 지도불러오는 script 하나만 놓고
+나머지는 다 jsx에서 해결하는 것이다 그래서 1번은 구식과 같은 원리임 복붙
+
+어떤 원리로 해야하냐면
+1. index.html의 header에
+<script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=실제 자신의 아이디"></script>
+   이걸 집어넣는다 이때 정적지도 할떄는 X-NCP-APIGW-API-KEY-ID=gzqf4on71t
+   이렇게 썼으니까 낯설거임 하지만 ncpClientId 옆에도 내가 받은 id쓰는거 맞음
+   그리고 이때는 이상하게도 비번 없이 아이디만 넣어도됨
+   그래서 결국 이렇게된다
+    <script type="text/javascript" src="https://openapi.map.naver.com/openapi/v3/maps.js?ncpClientId=gzqf4on71t"></script>
+
+2. 
