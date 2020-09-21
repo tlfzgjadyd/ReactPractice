@@ -21,9 +21,8 @@
     border-radius:5px;
     width:100%;
 }
-.MapProblem #mapArea{
+.MapProblem #map{
     border: 2px solid white;
-    background-color:rgba(210, 176, 230, 0.651);
     border-radius:5px;
     width:40%;
     height:400px;
