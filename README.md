@@ -16,4 +16,4 @@
 0915 -> 도메인 연결 성공<br/>
 0916 -> deploy 이후의 api에러 해결(http->https)및 지도 연결 시작, static지도 연결 완료, dynamic지도 연결 시작<br/>
 0921 -> dynamic 지도 연결 야매는 성공 jsx버전은 아직임<br/>
-0923 -> dynamic 지도 연결 
+0923 -> dynamic 지도 연결 성공
