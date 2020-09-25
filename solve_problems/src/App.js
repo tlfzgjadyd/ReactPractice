@@ -3,6 +3,7 @@ import './App.css';
 import {BrowserRouter as Router, Switch, Route, Link, } from 'react-router-dom'
 import WeatherProblem from "./Components/WeatherProblem/WeatherProblem"
 import MapProblem from "./Components/MapProblem/MapProblem"
+import BaseSelectProblem from "./Components/BaseSelectProblem/BaseSelectProblem"
 function App() {
   return (
     <div className="App">
@@ -15,7 +16,8 @@ function App() {
         <div className="StartButtons">
         <h3>당신은 다음과 같은 일들을 할 수 있습니다</h3><br/>
           <Link to="WeatherProblem">1. 지구온난화 진행시키기</Link><br/>
-          <Link to="MapProblem">2. 공격할 지역 설정하기</Link>
+          <Link to="MapProblem">2. 공격할 지역 설정하기</Link><br/>
+          <Link to="BaseSelectProblem">3. 거점 선택하기</Link>
         </div>
         <Switch>
           <Route exact path="/">
@@ -26,7 +28,10 @@ function App() {
           </Route>
           <Route path="/MapProblem">
              <MapProblem/>
-          </Route>      
+          </Route>   
+          <Route path="/BaseSelectProblem">
+             <BaseSelectProblem/>
+          </Route>   
         </Switch>
       </Router>
       </div>

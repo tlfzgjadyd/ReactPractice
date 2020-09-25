@@ -1,4 +1,3 @@
-import Axios from 'axios';
 import React, { PureComponent } from 'react';
 
 class WeatherByFetch extends PureComponent {
