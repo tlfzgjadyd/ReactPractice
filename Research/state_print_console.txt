@@ -1,0 +1,49 @@
+<state값 제대로 찍어주기>
+
+console.log로 response.data.값을 바로 찍어줄때는 문제가 없다
+그래서 response 받아온 직후에 response 통째로 찍어주는것은 괜찮음
+하지만 state값을 변경한 후 그 값을 찍어주려 할때는 
+componentDidUpdate()안에서 찍어줘야한다
+이유는 setState는 비동기이기 때문에 언제 실제 setState가 될지 모르기 때문에
+완료된 후의 함수인 componentDidUpdate 안에서 찍어줘야 하는것
+
+componentDidMount안에서 찍어도 가끔씩 작동하는데 이건 그냥 운에 따라
+됐다 안됐다 하는것이고 완전히 setState가 완료되어 state값이 변경된 후에
+찍어주는 것이 좋다
+
+그래서 setState는 componentDidMount 안에서,
+찍어주는건 componentDidUpdate 안에서 해야하며
+성공한 코드는 다음과 같다
+import React, { PureComponent } from 'react';
+import "./BaseSelectProblem.css"
+import axios from "axios"
+class BaseSelectProblem extends PureComponent {
+    constructor(){
+        super();
+        this.state={
+            id : " ",
+            name : " "
+        }
+    }
+    componentDidMount(){
+        axios.get('https://api.banchango.shop/v1/warehouses')
+        .then(response=>{
+            console.log(response)
+            this.setState({id : response.data.warehouses[0].id});
+            console.log("hello");
+        });
+        
+    }
+    componentDidUpdate(){
+        console.log(this.state.id);
+    }
+    render() {
+        return (
+            <div className= "BaseSelectProblem">
+                 
+            </div>
+        );
+    }
+}
+
+export default BaseSelectProblem;
