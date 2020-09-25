@@ -18,7 +18,6 @@ class MapProblem extends PureComponent {
         console.log(this.state.mapOptions[0].center);// 이렇게 배열안에 넣은 원소는 this.state.배열명[indez].변수명 여기까지 다 입력해야지만 출력이 가능하다
         // this.setState(this.state.mapOptions[0].center);
         console.log(this.state.mapOptions[0].center);
-       //map먼저 만들기 그다음에 좌표 설정해야 에러안남
        this.setState({mapOptions:  [{center:new window.naver.maps.LatLng(37.3595704, 127.105399), zoom : 10 }], ...this.state});
        this.setState({map:new window.naver.maps.Map('map', this.mapOptions), ...this.state});
        //그리고 여기서 안됐던 이유는 잘못된 예제를 가져왔기 때문이었음 weather측에서 안쓰는 trnasaction배열 내에도 temp있지만 실제로 쓴건 바깥의 temp임
