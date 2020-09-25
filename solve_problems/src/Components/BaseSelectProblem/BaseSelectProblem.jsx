@@ -5,6 +5,7 @@ class BaseSelectProblem extends PureComponent {
     constructor(){
         super();
         this.state={
+            selected:" ",
             id0 : " ",
             name0 : " ",
             types0:" ",
@@ -15,9 +16,19 @@ class BaseSelectProblem extends PureComponent {
             name2 : " ",
             types2:" "
         }
-       
+        this.selectedColor=this.selectedColor.bind(this);   
     }
-
+    selectedColor(event){
+       // console.log(event.target.className);
+       if(this.state.selected!=" ")
+       {
+        this.state.selected.className="nonActive" 
+        console.log(this.state.selected.className);
+       } 
+       event.target.className="active";
+       // console.log(event.target.className);
+        this.setState({selected : event.target});
+    }
     componentDidMount(){
         axios.get('https://api.banchango.shop/v1/warehouses')
         .then(response=>{
@@ -37,15 +48,16 @@ class BaseSelectProblem extends PureComponent {
     }
     componentDidUpdate(){
         console.log(this.state.id1);
+        console.log(this.state.selected);
     }
 
     render() {
         return (
             <div className= "BaseSelectProblem">
                  <ol id="baseList">
-                     <li >{this.state.name0} ( {this.state.types0} )</li>
-                     <li>{this.state.name1} ( {this.state.types1} )</li>
-                     <li>{this.state.name2} ( {this.state.types2} )</li>
+                     <li className="nonActive" onClick={this.selectedColor}>{this.state.name0} ( {this.state.types0} )</li>
+                     <li className="nonActive" onClick={this.selectedColor}>{this.state.name1} ( {this.state.types1} )</li>
+                     <li className="nonActive" onClick={this.selectedColor}>{this.state.name2} ( {this.state.types2} )</li>
                  </ol>
             </div>
         );
