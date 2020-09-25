@@ -20,3 +20,12 @@ get  주소   주소  send
 header parameter로 Authorization 권한 인증 토큰을 보내줘야한다
 
 https://skfk0135.stoplight.io/docs/wherehouse-api-spec/reference/wherehouse.v1.yaml/paths/~1v1~1warehouses~1%7BwarehouseId%7D/patch
+
+어쨌든 그렇게 창고 출력 예제에서 response 받은걸 콘솔에 찍어보면
+api docs와 다른 이상한게 막 나옴
+거기에 맨앞에 data라 되어있지만 사실 내가 찍은 그 전체는 response이고
+그 response중의 하위인 data 안에 있는 것만 api docs에 써둔 것이다
+우리가 받아와야 하는것도 data항목 안에 전부 있음
+그러니까 위계구조가 이런식으로 되는것이다
+response>config, data, 기타등등
+                           ^---------------이 안에 api docs에 쓰인 내용이 있다
