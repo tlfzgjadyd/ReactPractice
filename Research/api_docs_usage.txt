@@ -1,0 +1,31 @@
+<api docs>
+https://skfk0135.stoplight.io/docs/wherehouse-api-spec/reference/wherehouse.v1.yaml/paths/~1v1~1warehouses/get
+
+이건 프론트는 따로 안짜고 지원되는는거고 완전히 백엔드에 해당한다
+네이버 api docs와 같은 역할을 함
+
+=>해설 : Query Parameters는 ?랑 &로 넘기는 값들이고
+optional이라 되어있으면 굳이 안보내도 되고 required라고 되어있으면 반드시 보내줘야한다
+
+Responses는 돌려주는 부분인데 초록색으로 ok된게 정상 리턴값
+주황색으로 된게 에러났을때 돌려주는값
+여기 안에도 required optional이 있는데 required는 반드시 돌려줄 것이라는 의미이고 optional은 내가 다른 선택적 옵션을 보냈을때 추가적으로 돌려주는 값이다
+
+오른쪽에 try it out밑에 있는
+get  주소   주소  send
+이것은 axios에 쓰는 주소값이다
+2개의 주소가 끊겨서 있겠지만 그걸 이어붙여서 axios주소로 쓰면됨
+
+지금 이것은 창고 조회라 아무런 인증 없이도 조회가 가능하도록 본인인증 파라미터를 안보냈는데 창고 정보 수정같은 것은
+header parameter로 Authorization 권한 인증 토큰을 보내줘야한다
+
+https://skfk0135.stoplight.io/docs/wherehouse-api-spec/reference/wherehouse.v1.yaml/paths/~1v1~1warehouses~1%7BwarehouseId%7D/patch
+
+어쨌든 그렇게 창고 출력 예제에서 response 받은걸 콘솔에 찍어보면
+api docs와 다른 이상한게 막 나옴
+거기에 맨앞에 data라 되어있지만 사실 내가 찍은 그 전체는 response이고
+그 response중의 하위인 data 안에 있는 것만 api docs에 써둔 것이다
+우리가 받아와야 하는것도 data항목 안에 전부 있음
+그러니까 위계구조가 이런식으로 되는것이다
+response>config, data, 기타등등
+                           ^---------------이 안에 api docs에 쓰인 내용이 있다
