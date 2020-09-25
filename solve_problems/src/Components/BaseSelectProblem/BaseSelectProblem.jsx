@@ -31,7 +31,7 @@ class BaseSelectProblem extends PureComponent {
                            types1 : response.data.warehouses[1].types,
                            id2 : response.data.warehouses[2].id,
                            name2 : response.data.warehouses[2].name,
-                           types1 : response.data.warehouses[1].types,
+                           types2 : response.data.warehouses[2].types,
                         });
         });
     }
