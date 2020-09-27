@@ -17,5 +17,6 @@
 0916 -> deploy 이후의 api에러 해결(http->https)및 지도 연결 시작, static지도 연결 완료, dynamic지도 연결 시작<br/>
 0921 -> dynamic 지도 연결 야매는 성공 jsx버전은 아직임<br/>
 0923 -> dynamic 지도 연결 성공<br/>
-0925 -> api받아오기 및 버튼 클릭시 색깔 변하게하기<br/>
+0925 -> api받아오기 및 버튼 클릭시 색깔 변하게하기<br/><br/>
+🔮 < wh api test > <br/>
 0927 -> postman을 사용하여 권한인증 포함된 POST 실험하기<br/>
