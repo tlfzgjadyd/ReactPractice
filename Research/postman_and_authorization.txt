@@ -1,0 +1,99 @@
+<POSTMAN 사용하기>
+
+포스트맨을 사용하여 API 연동 테스트를 해본다
+
+1. REQUEST 생성하기 누른다
+2. GET/POST 타입지정
+3. axios에 쓰던 주소를 쓴다
+4. 권한이 필요한 요청인 경우 Headers 탭에 다음을 추가해야됨
+   Authorization      Bearer 내가 받은 권한키
+   (이떄 권한키 받는법은 아래에서 추가설명)
+5. Body탭으로 가서 required 키들을 다음과 같이 입력
+   (이때 잘 들어갔는지 확인해봐야하므로 위도와 경도 어떤 위치로 했는지
+    잘 기억해놔야한다 위도경도 찾는법도 아래에서 추가설명)
+	------------------------
+	{
+	    "name" : "API 테스트",
+	    "address" : "경기도",
+ 	   "serviceType" : "GENERAL",
+ 	   "location" : {
+ 	       "latitude" :  37.49586474177901,
+ 	       "longitude" : 126.9578029357067
+	    },
+	    "types":["CONTAINER"],
+ 	   "attachmentIds":[]
+	}
+	---------------------------
+6. Send 눌렀을때 아래쪽에 여러가지 response값들이 오면 성공한것임
+	------------------------
+	{
+   	 "warehouse": {
+        	"id": 20,
+        	"name": "API 테스트",
+       	 "serviceType": "GENERAL",
+        	"types": [
+           	 "CONTAINER"
+        	],
+        	"landArea": null,
+        	"totalArea": null,
+        	"owner": {
+           	 	"id": 5,
+          	  	"name": "tlfzgjadyd",
+           	 	"email": "tlfzgjadyd@naver.com",
+           	 	"type": "SHIPPER",
+           	 	"telephoneNumber": "01057520474",
+            	"phoneNumber": "01057520474",
+            	"companyName": "wh"
+       		 },
+        	"address": "경기도",
+        	"addressDetail": null,
+        	"availableWeekdays": null,
+        	"openAt": null,
+        	"closeAt": null,
+        	"availableTimeDetail": null,
+        	"cctvExist": false,
+        	"securityCompanyExist": false,
+        	"securityCompanyName": null,
+        	"doorLockExist": true,
+        	"airConditioningType": "NONE",
+        	"workerExist": false,
+        	"insuranceExist": false,
+        	"insuranceName": null,
+        	"canPickup": false,
+        	"parkingScale": null,
+        	"canPark": false,
+        	"attachments": [],
+        	"location": {
+           		 "latitude": 37.49586474177901,
+        	    	 "longitude": 126.9578029357067
+       		 },
+        	"additionalInfo": {
+            	"id": 5,
+            	"monthlyFee": null,
+            	"depositFee": null,
+            	"maintenanceFee": null,
+           	 	"minUseTerm": null
+        		}
+    	}
+	}
+	---------------------------
+
+======================================
+<권한키 받는법>
+
+1. 사둔 도메인에서 로그인
+2. 개발자 도구창을 켠다 F12로 한방이더라
+3. 탭 더보기에서 Application을 선택
+4. 왼쪽 목록중 Storage의 LocalStorage의 *화살표*를 클릭하면
+   바로 밑에 localhost:3000으로 항목이 하나 더뜨며 오른쪽에도 창이뜸
+5. AccessToken과 RefreshToken이 있는데 이 둘은 다른것이며
+   value값을 복사해서 포스트맨의 Authorization에 넣어야됨
+
+   Authorization    Bearer  복사한값
+  
+   이렇게한다
+=======================================
+<위도 경도 알아내기>
+
+1. 다음 사이트를 들어간다 http://lalo.esran.com/?locname
+2. 지도상에서 원하는 위치 클릭하면 지도 바로 밑에 위도 경도뜸
