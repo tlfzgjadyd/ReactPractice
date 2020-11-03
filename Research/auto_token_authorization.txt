@@ -1,0 +1,17 @@
+<토큰 가져와서 자동으로 권한인증하기>
+
+class Admin extends PureComponent {
+  constructor(){
+    super();
+    this.state={
+      header:{//이건 이름 바꿔도됨 아래는 안됨
+         headers:{Authorization:'Bearer '+localStorage.getItem("AccessToken")}
+      },
+
+ //이때this.state안의 header안의 headers 안의 Authorization에
+ //쓸 경우에만 먹혔으며 Bearer은 필수,
+ //두가지 토큰중 AcessToken을 뽑아오도록했다
+ //원래는 하드코딩으로 매번 저부분을 바꿔썼지만
+ //이제는 로그인 되어있을 경우 알아서 뽑아가도록 바뀐것
+ //뽑아온것이 맞는지 확인하기 위해서는
+ //console.log로 localStorage.getItem("AccessToken")을 찍어보면 알 수 있었다
