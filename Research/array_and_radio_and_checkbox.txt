@@ -1,0 +1,53 @@
+배열에 관하여
+선언, setState로 axios는 똑같음
+다만 onChange로 작동하는 inputAll에서
+var typesTemp=this.state.types.slice();로 간이배열 만들어주고
+특정 개체들 누를때마다 push해줘야됨
+    case "cj":  deliveryTemp.push("cj");this.setState({deliveryCompanies:deliveryTemp});break;
+    case "postOffice":  deliveryTemp.push("postOffice");this.setState({deliveryCompanies:deliveryTemp});break;
+   case "hanjin":  deliveryTemp.push("hanjin");this.setState({deliveryCompanies:deliveryTemp});break;
+   case "coopang":  deliveryTemp.push("coopang");this.setState({deliveryCompanies:deliveryTemp});break;
+
+        <label>제휴택배사*</label>
+        <div id="deliveryCompanies" name="deliveryCompanies" onChange={this.inputAll}>
+        <label>cj</label>
+        <input type="checkbox" name="cj" value="cj"></input>
+        <label>우체국</label>
+        <input type="checkbox" name="postOffice" value="postOffice"></input>
+        <label>한진</label>
+        <input type="checkbox" name="hanjin" value="hanjin"></input>
+        <label>쿠팡</label>
+        <input type="checkbox" name="coopang" value="coopang"></input>
+        </div>
+
+    case "cj":  deliveryTemp.push(e.target.value);this.setState({deliveryCompanies:deliveryTemp});break;
+    case "postOffice":  deliveryTemp.push(e.target.value);this.setState({deliveryCompanies:deliveryTemp});break;
+   case "hanjin":  deliveryTemp.push(e.target.value);this.setState({deliveryCompanies:deliveryTemp});break;
+   case "coopang":  deliveryTemp.push(e.target.value);this.setState({deliveryCompanies:deliveryTemp});break;
+
+근데 중복을 제거해야해서 저case 하나마다 flag둬서 이리해야했음
+    if(this.state.itemFlag1=="false")
+    {
+      itemsTemp.push(e.target.value);
+       this.setState({mainItemTypes:itemsTemp});
+       this.setState({itemFlag1:"true"})
+      }
+     else
+      {
+       itemsTemp=itemsTemp.filter(item=>item!==e.target.value);
+      this.setState({mainItemTypes:itemsTemp});
+      this.setState({typeFlag1:"false"})  
+     }
+     break;
+그리고 componentDidUpdate(){    안에서 확인차 진짜배열 찍어주기
+
+
+
+
+
+
+라디오버튼 
+        <label>3PL vs 풀필먼트 업체</label>
+        <input type="radio" name="type" className="type" value="3PL"  onChange={this.inputAll}/>3PL
+        <input type="radio" name="type" className="type" value="FULLFILMENT" onChange={this.inputAll}/>풀필먼트
+
